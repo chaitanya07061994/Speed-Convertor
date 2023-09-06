@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Converter Tool</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            text-align: center;
+       
+         background-image: url(https://images.pexels.com/photos/593172/pexels-photo-593172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
+
+
+
+ }
+        .converter {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        h1 {
+            color: #333;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto mt-5 converter">
+                <h1>Speed Converter</h1>
+                <div class="form-group">
+                    <label for="inputSpeed">Enter Speed:</label>
+                    <input type="number" id="inputSpeed" class="form-control" placeholder="Enter speed..." step="0.001">
+                </div>
+                <div class="form-group">
+                    <label for="fromUnit">From:</label>
+                    <select id="fromUnit" class="form-control">
+                        <option value="mph">Miles per hour (mph)</option>
+                        <option value="kmph">Kilometers per hour (km/h)</option>
+                        <option value="mps">Meters per second (m/s)</option>
+                        <option value="knot">Knots (kt)</option>
+                        <option value="fps">Feet per second (ft/s)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="toUnit">To:</label>
+                    <select id="toUnit" class="form-control">
+                        <option value="mph">Miles per hour (mph)</option>
+                        <option value="kmph">Kilometers per hour (km/h)</option>
+                        <option value="mps">Meters per second (m/s)</option>
+                        <option value="knot">Knots (kt)</option>
+                        <option value="fps">Feet per second (ft/s)</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-block" onclick="convertSpeed()">Convert</button>
+                <div class="result">
+                    <h3>Result:</h3>
+                    <p id="convertedSpeed"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function convertSpeed() {
+            const inputSpeed = parseFloat(document.getElementById('inputSpeed').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            let result;
+
+            if (fromUnit === toUnit) {
+                result = inputSpeed;
+            } else if (fromUnit === 'mph' && toUnit === 'kmph') {
+                result = inputSpeed * 1.60934;
+            } else if (fromUnit === 'mph' && toUnit === 'mps') {
+                result = inputSpeed * 0.44704;
+            } else if (fromUnit === 'mph' && toUnit === 'knot') {
+                result = inputSpeed * 0.868976;
+            } else if (fromUnit === 'mph' && toUnit === 'fps') {
+                result = inputSpeed * 1.46667;
+            } else if (fromUnit === 'kmph' && toUnit === 'mph') {
+                result = inputSpeed / 1.60934;
+            } else if (fromUnit === 'kmph' && toUnit === 'mps') {
+                result = inputSpeed / 3.6;
+            } else if (fromUnit === 'kmph' && toUnit === 'knot') {
+                result = inputSpeed / 1.852;
+            } else if (fromUnit === 'kmph' && toUnit === 'fps') {
+                result = inputSpeed * 0.911344;
+            } else if (fromUnit === 'mps' && toUnit === 'mph') {
+                result = inputSpeed / 0.44704;
+            } else if (fromUnit === 'mps' && toUnit === 'kmph') {
+                result = inputSpeed * 3.6;
+            } else if (fromUnit === 'mps' && toUnit === 'knot') {
+                result = inputSpeed * 1.94384;
+            } else if (fromUnit === 'mps' && toUnit === 'fps') {
+                result = inputSpeed * 3.28084;
+            } else if (fromUnit === 'knot' && toUnit === 'mph') {
+                result = inputSpeed * 1.15078;
+            } else if (fromUnit === 'knot' && toUnit === 'kmph') {
+                result = inputSpeed * 1.852;
+            } else if (fromUnit === 'knot' && toUnit === 'mps') {
+                result = inputSpeed / 1.94384;
+            } else if (fromUnit === 'knot' && toUnit === 'fps') {
+                result = inputSpeed * 1.68781;
+            } else if (fromUnit === 'fps' && toUnit === 'mph') {
+                result = inputSpeed / 1.46667;
+            } else if (fromUnit === 'fps' && toUnit === 'kmph') {
+                result = inputSpeed / 0.911344;
+            } else if (fromUnit === 'fps' && toUnit === 'mps') {
+                result = inputSpeed / 3.28084;
+            } else if (fromUnit === 'fps' && toUnit === 'knot') {
+                result = inputSpeed / 1.68781;
+            }
+
+            document.getElementById('convertedSpeed').textContent = `${inputSpeed.toFixed(3)} ${fromUnit} is ${result.toFixed(3)} ${toUnit}`;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
